@@ -1,0 +1,45 @@
+pipeline
+{
+    agent any 
+   
+    stages
+   {  
+      stage ('build')
+	  {
+	      steps	
+		  {
+		    echo 'Hello build'	
+		  }
+	  }
+	  
+	  stage ('Test')
+	  {
+	      steps	
+		  {
+		    echo 'Hello test'	
+		  }
+	  }
+	  
+	  stage ('Deploy')
+	  {
+	      steps	
+		  {
+		    echo 'Hello Deploy'	
+		  }
+	  }
+   }
+   
+   post
+   {
+       always
+	   {
+	   emailext body: '''Hi,
+
+       Please check your build the recent build got failed
+
+       Thank you''', subject: 'Build Failure', to: 'aadeshverma961@gmail.com'
+	   } 
+            
+   }
+   
+}
